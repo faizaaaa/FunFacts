@@ -1,18 +1,27 @@
+
 package com.example.funfacts;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Random;
 
 public class FunFactsActivity extends AppCompatActivity {
+    public static final String TAG = FunFactsActivity.class.getSimpleName();
+    private FactBook factBook = new FactBook();
+    private ColorWheel colorWheel = new ColorWheel();
 // Declare our view variables
     private TextView factTextView;
     private Button showFactButton;
+    private RelativeLayout relativeLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,32 +30,22 @@ public class FunFactsActivity extends AppCompatActivity {
         //Assign the Views from the layout file to corresponding variables
         factTextView = findViewById(R.id.factTextView);
         showFactButton = findViewById(R.id.showFactButton);
+        relativeLayout = findViewById(R.id.relativeLayout);
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String[] facts = {
-                        "Ants stretch when they wake up in the morning.",
-                        "Ostriches can run faster than horses.",
-                        "Olympic gold medals are actually made mostly of silver.",
-                        "You are born with 300 bones; by the time you are an adult you will have 206.",
-                        "It takes about 8 minutes for light from the Sun to reach Earth.",
-                        "Some bamboo plants can grow almost a meter in just one day.",
-                        "The state of Florida is bigger than England.",
-                        "Some penguins can leap 2-3 meters out of the water.",
-                        "On average, it takes 66 days to form a new habit.",
-                        "Mammoths still walked the earth when the Great Pyramid was being built." };
-
-            // The button was clicked so update the factTextView with a new fact.
-                //Randomly select a fact
-                Random randomGenerator = new Random();
-                int randomNumber = randomGenerator.nextInt(10);
-                String fact = randomNumber+"";
-
+                String fact = factBook.getFact();
+                int color = colorWheel.getColor();
                 //Update the screen with our new fact.
                 factTextView.setText(fact);
+                relativeLayout.setBackgroundColor(color);
+                showFactButton.setTextColor(color);
+
             }
         };
         showFactButton.setOnClickListener(listener);
 
+        //Toast.makeText(this, "Yay! Our Activity was created!", Toast.LENGTH_SHORT).show();
+        Log.d(TAG,"We are logging from the onCreate() method.");
     }
 }

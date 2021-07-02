@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="#51b46d"
     android:padding="50dp"
+    android:id="@+id/relativeLayout"
     tools:context=".FunFactsActivity">
 
     <TextView
@@ -34,7 +35,7 @@
         android:layout_marginBottom="3dp"
         android:background="@color/white"
         android:text="Show Another Fun Fact"
-        android:textColor="@color/black"
+        android:textColor="#51b46d"
         app:backgroundTint="@color/white" />
 
 </RelativeLayout>
